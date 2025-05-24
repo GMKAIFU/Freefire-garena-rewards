@@ -1,0 +1,400 @@
+/* Basic Reset & Body Style */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* NEW FONT */
+    background-color: #121212; /* Slightly lighter dark background */
+    color: #e0e0e0;
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    transition: background-color 0.5s ease; /* For potential theme changes */
+}
+
+body.preload * { /* Disable transitions on load */
+    transition: none !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 10px #f0c14b55, 0 0 15px #f0c14b33; }
+    50% { transform: scale(1.03); box-shadow: 0 0 15px #f0c14b88, 0 0 25px #f0c14b55; }
+    100% { transform: scale(1); box-shadow: 0 0 10px #f0c14b55, 0 0 15px #f0c14b33; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+
+/* Header & Navbar */
+header {
+    background-color: rgba(10, 10, 10, 0.85); /* Darker, semi-transparent */
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(8px); /* Frosted glass effect */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    animation: fadeInDown 0.5s ease-out;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 45px; /* Slightly larger */
+    transition: transform 0.3s ease;
+}
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.social-icons a, .nav-actions a {
+    color: #bbb;
+    margin: 0 12px;
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.social-icons a:hover, .nav-actions a:hover {
+    color: #f0c14b; /* Gold hover */
+    transform: translateY(-2px);
+}
+
+.menu-toggle {
+    display: none;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    text-align: center;
+    padding-bottom: 30px;
+    min-height: 45vh; /* Ensure it has some height */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align content to bottom */
+    animation: fadeIn 1s 0.2s ease-out backwards; /* Delay fadeIn */
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('ffimages/hero_background.jpg');
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.5; /* Softer background */
+    z-index: -1;
+}
+.hero-background::after { /* Vignette effect */
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(18,18,18,0.8) 90%);
+}
+
+
+.hero-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1;
+}
+
+.uid-form {
+    display: flex;
+    margin-bottom: 25px; /* Increased margin */
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 8px; /* Rounded corners for the group */
+    overflow: hidden; /* To make border-radius work on children */
+}
+
+.uid-form input[type="text"] {
+    flex-grow: 1;
+    padding: 14px 18px; /* Increased padding */
+    border: 1px solid #444; /* Darker border */
+    background-color: #2a2a2a; /* Dark input background */
+    color: #e0e0e0;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    border-right: none; /* Remove right border to merge with button */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.uid-form input[type="text"]:focus {
+    outline: none;
+    border-color: #f0c14b;
+    box-shadow: 0 0 0 3px rgba(240, 193, 75, 0.3);
+}
+
+
+.uid-form button {
+    padding: 14px 25px;
+    background: linear-gradient(to right, #f0ad4e, #ec971f); /* Gold gradient */
+    color: #111; /* Dark text for contrast */
+    border: none;
+    font-weight: 600; /* Bolder */
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.uid-form button:hover {
+    background: linear-gradient(to right, #ec971f, #f0ad4e);
+    transform: scale(1.02);
+}
+.uid-form button:active {
+    transform: scale(0.98);
+}
+
+.claim-banner {
+    background: linear-gradient(45deg, #f7de5f, #f0c14b, #e6a12c, #f0c14b, #f7de5f);
+    background-size: 300% 300%;
+    color: #111;
+    padding: 14px 30px;
+    font-weight: 700; /* Bolder */
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    border: 2px solid #a88734;
+    border-radius: 8px; /* More rounded */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2), 0 0 20px rgba(240, 193, 75, 0.4);
+    width: 100%;
+    max-width: 550px;
+    animation: pulse 2.5s infinite ease-in-out, fadeInUp 0.5s 0.2s ease-out backwards;
+    letter-spacing: 0.5px;
+}
+
+
+/* Rewards Section */
+.rewards-section {
+    padding: 40px 15px; /* Increased padding */
+    background: radial-gradient(ellipse at center, #3d0f0f, #2a0a0a, #1a0505); /* Darker fiery red */
+    animation: fadeIn 1s 0.4s ease-out backwards;
+}
+
+.rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); /* Slightly larger minmax */
+    gap: 25px; /* Increased gap */
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.reward-item {
+    background-color: rgba(20, 20, 20, 0.6); /* Darker item background */
+    border: 2px solid #c0943a88; /* Semi-transparent gold border */
+    border-radius: 10px; /* More rounded */
+    padding: 15px; /* Adjusted padding if needed */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    opacity: 0; /* For stagger animation */
+    transform: translateY(20px); /* For stagger animation */
+    animation: fadeInUp 0.5s ease-out forwards; /* Individual item animation */
+}
+
+/* Staggered animation for reward items */
+.rewards-grid .reward-item:nth-child(1) { animation-delay: 0.1s; }
+.rewards-grid .reward-item:nth-child(2) { animation-delay: 0.15s; }
+.rewards-grid .reward-item:nth-child(3) { animation-delay: 0.2s; }
+.rewards-grid .reward-item:nth-child(4) { animation-delay: 0.25s; }
+.rewards-grid .reward-item:nth-child(5) { animation-delay: 0.3s; }
+.rewards-grid .reward-item:nth-child(6) { animation-delay: 0.35s; }
+.rewards-grid .reward-item:nth-child(7) { animation-delay: 0.4s; }
+.rewards-grid .reward-item:nth-child(8) { animation-delay: 0.45s; }
+.rewards-grid .reward-item:nth-child(9) { animation-delay: 0.5s; }
+.rewards-grid .reward-item:nth-child(10) { animation-delay: 0.55s; }
+.rewards-grid .reward-item:nth-child(11) { animation-delay: 0.6s; }
+.rewards-grid .reward-item:nth-child(12) { animation-delay: 0.65s; }
+.rewards-grid .reward-item:nth-child(13) { animation-delay: 0.7s; }
+.rewards-grid .reward-item:nth-child(14) { animation-delay: 0.75s; }
+.rewards-grid .reward-item:nth-child(15) { animation-delay: 0.8s; }
+
+
+.reward-item:hover {
+    transform: translateY(-8px) scale(1.02); /* Lift and slightly scale */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 15px #f0c14b55; /* Enhanced shadow with gold glow */
+    border-color: #f0c14b; /* Brighter gold border */
+}
+
+.reward-item .item-header {
+    font-size: 0.9rem;
+    font-weight: 600; /* Bolder */
+    color: #f0f0f0;
+    margin-bottom: 3px; /* REDUCED margin */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.reward-item .item-subtitle {
+    display: block;
+    font-size: 0.7rem;
+    color: #aaa;
+    font-weight: 400; /* Lighter weight */
+    margin-bottom: 8px; /* Add some space below subtitle */
+}
+
+.reward-item img {
+    max-width: 100%;
+    height: auto;
+    max-height: 90px;
+    object-fit: contain;
+    margin: 5px auto 10px auto; /* Adjusted margins */
+    transition: transform 0.3s ease;
+}
+.reward-item:hover img {
+    transform: scale(1.05); /* Image zoom on hover */
+}
+
+.collect-button {
+    display: inline-block;
+    background: linear-gradient(to bottom, #f7de5f, #f0c14b);
+    color: #111;
+    border: 1px solid #a88734;
+    padding: 10px 15px;
+    border-radius: 6px; /* Slightly more rounded */
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: 100%;
+    margin-top: auto; /* Pushes button to bottom if content above is less */
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease; /* Broad transition */
+    position: relative;
+    overflow: hidden; /* For shimmer effect */
+}
+.collect-button::before { /* Shimmer effect */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Start off-screen */
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s ease-in-out;
+}
+.collect-button:hover::before {
+    left: 150%; /* Move across the button */
+}
+.collect-button:hover {
+    transform: scale(1.05); /* Existing scale */
+    filter: brightness(1.1); /* Slight brightness increase */
+    box-shadow: 0 2px 8px rgba(240, 193, 75, 0.3);
+}
+.collect-button:active {
+    transform: scale(1.02);
+    filter: brightness(0.95);
+}
+
+/* EVO Token specific styles */
+.evo-token .item-header { /* Shared styles, adjust if needed */
+    color: #ffeb99;
+}
+
+.evo-image-container { /* Ensure this container is used for EVO gun images */
+    background-color: rgba(30, 15, 0, 0.3);
+    border: 1px solid #7a5c2a66;
+    border-radius: 5px;
+    padding: 10px 5px 5px 5px; /* Adjust bottom padding if token count is inside */
+    position: relative;
+    margin: 5px auto 10px auto; /* Adjusted margins */
+    min-height: 95px; /* Consistent height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center image if it's smaller */
+}
+.evo-image-container img {
+    max-height: 65px; /* Smaller image for token-like display */
+    margin-bottom: 0; /* Remove margin if token count is below */
+}
+
+
+/* Redeem Code Item specific styles */
+.redeem-code-item .item-header {
+    color: #b3e5fc; /* Light blue for redeem titles */
+}
+.redeem-code-item img {
+    max-height: 75px;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 25px;
+    background-color: #0a0a0a; /* Darker footer */
+    color: #777;
+    font-size: 0.85em;
+    margin-top: 40px;
+    border-top: 1px solid #222;
+    animation: fadeInUp 0.5s 0.6s ease-out backwards;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar { padding: 0 15px; }
+    .social-icons { display: none; }
+    .menu-toggle { display: inline-block; }
+    .hero-background { height: 40vh; }
+    .hero-content { margin-top: -50px; }
+    .claim-banner { font-size: 1rem; padding: 12px 20px; }
+    .rewards-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+    .reward-item { padding: 12px; }
+}
+
+@media (max-width: 480px) {
+    .rewards-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .uid-form input[type="text"], .uid-form button { padding: 12px; font-size: 0.9rem; }
+    .hero-content { margin-top: -30px; }
+    .claim-banner { font-size: 0.85rem; }
+    .collect-button { font-size: 0.85rem; padding: 9px 12px;}
+    .reward-item .item-header { font-size: 0.8rem; }
+    .reward-item .item-subtitle { font-size: 0.65rem; }
+    .popup-content { padding: 1.5rem; }
+    .popup-message { font-size: 1rem; }
+    .connect-btn { padding: 0.6rem 1.5rem; font-size: 0.95rem; }
+}

